@@ -8403,26 +8403,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
+    "C:\\Users\\vic3n\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\Inventory-Module\\InventoryModule\\InventoryModule.csproj",
+      "projectUniqueName": "C:\\Users\\vic3n\\OneDrive\\Desktop\\montecristo inventario\\Inventory-Module\\InventoryModule\\InventoryModule.csproj",
       "projectName": "InventoryModule",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Inventory-Module\\InventoryModule\\InventoryModule.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Inventory-Module\\InventoryModule\\obj\\",
+      "projectPath": "C:\\Users\\vic3n\\OneDrive\\Desktop\\montecristo inventario\\Inventory-Module\\InventoryModule\\InventoryModule.csproj",
+      "packagesPath": "C:\\Users\\vic3n\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vic3n\\OneDrive\\Desktop\\montecristo inventario\\Inventory-Module\\InventoryModule\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\vic3n\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8509,7 +8507,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
