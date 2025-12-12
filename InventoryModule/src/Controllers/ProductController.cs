@@ -49,7 +49,7 @@ public async Task<ActionResult<Productos>> GetProductoById(string id)
     return Ok(producto);
 }
 
-        [HttpPost]
+        [HttpPost("Agregar")]
         public async Task<ActionResult<Productos>> CreateProducto(CrearProductoDTO dto)
         {
             var existe = await _context.productos.AnyAsync(p => p.sku == dto.Sku);
