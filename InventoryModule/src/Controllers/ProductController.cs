@@ -6,7 +6,7 @@ using InventoryModule.dtos;
 
 namespace InventoryModule.src.controllers
 {
-    [Route("api/[controller]")] // Ruta base: api/productos
+    [Route("api/[controller]")] 
     [ApiController]
     public class ProductosController : ControllerBase
     {
@@ -17,14 +17,12 @@ namespace InventoryModule.src.controllers
             _context = context;
         }
 
-        // 1. GET: api/productos (Listar todos)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Productos>>> GetProductos()
         {
             return await _context.productos.ToListAsync();
         }
 
-        // 2. GET: api/productos/{sku} (Buscar por SKU)
         [HttpGet("{sku}")]
         public async Task<ActionResult<Productos>> GetProductoBySku(string sku)
         {
@@ -38,12 +36,9 @@ namespace InventoryModule.src.controllers
             return Ok(producto);
         }
 
-        // GET: api/productos/id/{id}
-// Ejemplo de llamada: /api/productos/id/3fe387e3-d1e8-491c-a7af-9ec26b745c52
 [HttpGet("id/{id}")] 
 public async Task<ActionResult<Productos>> GetProductoById(string id)
 {
-    // Aquí hacemos el match EXACTO con tu columna 'id_producto'
     var producto = await _context.productos.FirstOrDefaultAsync(p => p.id_producto == id);
 
     if (producto == null)
@@ -54,11 +49,9 @@ public async Task<ActionResult<Productos>> GetProductoById(string id)
     return Ok(producto);
 }
 
-        // 4. POST: api/productos (Crear)
         [HttpPost]
         public async Task<ActionResult<Productos>> CreateProducto(CrearProductoDTO dto)
         {
-            // Validar si el SKU ya existe para no duplicar
             var existe = await _context.productos.AnyAsync(p => p.sku == dto.Sku);
             if (existe)
             {
@@ -74,10 +67,10 @@ public async Task<ActionResult<Productos>> GetProductoById(string id)
                 categoria = dto.Categoria,
                 imagen = dto.Imagen,
                 pais = dto.Pais,
-                precio_venta = dto.PrecioVenta, // Asumiendo que en BD es decimal
+                precio_venta = dto.PrecioVenta, 
                 marca = dto.Marca,
                 precio_compra = dto.PrecioCompra,
-                umbral_alerta_stock_bajo = (int)dto.UmbralAlerta, // Convertimos a int si la BD lo requiere, o quita el (int) si es decimal
+                umbral_alerta_stock_bajo = (int)dto.UmbralAlerta, 
                 estado = dto.Estado,
                 id_proveedor = dto.ProveedorId
             };
@@ -88,7 +81,26 @@ public async Task<ActionResult<Productos>> GetProductoById(string id)
             return CreatedAtAction(nameof(GetProductoBySku), new { sku = nuevoProducto.sku }, nuevoProducto);
         }
 
-        // 5. PUT: api/productos/{sku} (Actualizar)
+[HttpPut("{sku}/deshabilitar")]
+public async Task<IActionResult> DeshabilitarProducto(string sku)
+{
+    var producto = await _context.productos.FirstOrDefaultAsync(p => p.sku == sku);
+
+    if (producto == null)
+    {
+        return NotFound(new { mensaje = $"No se encontró el producto con SKU: {sku}" });
+    }
+
+    producto.estado = "Deshabilitado";
+
+    await _context.SaveChangesAsync();
+
+    return Ok(new { 
+        mensaje = $"El producto {sku} ha sido deshabilitado correctamente.", 
+        estado_nuevo = producto.estado 
+    });
+}
+
         [HttpPut("{sku}")]
         public async Task<IActionResult> UpdateProducto(string sku, CrearProductoDTO dto)
         {
@@ -99,7 +111,6 @@ public async Task<ActionResult<Productos>> GetProductoById(string id)
                 return NotFound(new { mensaje = $"No se encontró producto con SKU: {sku}" });
             }
 
-            // Actualizamos campos
             productoExistente.nombre = dto.Nombre;
             productoExistente.descripcion = dto.Descripcion;
             productoExistente.categoria = dto.Categoria;
@@ -110,7 +121,6 @@ public async Task<ActionResult<Productos>> GetProductoById(string id)
             productoExistente.precio_compra = dto.PrecioCompra;
             productoExistente.umbral_alerta_stock_bajo = (int)dto.UmbralAlerta;
             productoExistente.estado = dto.Estado;
-            // id_proveedor también se podría actualizar si es necesario:
             productoExistente.id_proveedor = dto.ProveedorId;
 
             try
