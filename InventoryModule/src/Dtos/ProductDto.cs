@@ -22,3 +22,8 @@ public record ProductoResponseDTO(
     decimal PrecioVenta, 
     int StockTotal 
 );
+
+public record UpdateStockDTO(
+    int StockActual,
+    int? UmbralAlerta
+);
